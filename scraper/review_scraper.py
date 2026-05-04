@@ -1,11 +1,4 @@
-from selenium import webdriver
-
-from selenium.webdriver.common.by import By
-
-from selenium.webdriver.chrome.options import Options
-
 import random
-import time
 
 
 # =====================================================
@@ -139,35 +132,6 @@ GENERAL_REVIEWS = [
 
 
 # =====================================================
-# CHROME DRIVER
-# =====================================================
-
-def create_driver():
-
-    options = Options()
-
-    options.add_argument("--headless=new")
-
-    options.add_argument(
-        "--disable-blink-features=AutomationControlled"
-    )
-
-    options.add_argument("--no-sandbox")
-
-    options.add_argument("--disable-dev-shm-usage")
-
-    options.add_argument(
-        "user-agent=Mozilla/5.0"
-    )
-
-    driver = webdriver.Chrome(
-        options=options
-    )
-
-    return driver
-
-
-# =====================================================
 # DETECT CATEGORY
 # =====================================================
 
@@ -182,6 +146,7 @@ def detect_category(url):
         "pixel",
         "mobile",
         "phone"
+
     ]):
 
         return "phone"
@@ -194,6 +159,7 @@ def detect_category(url):
         "hp",
         "lenovo",
         "asus"
+
     ]):
 
         return "laptop"
@@ -204,7 +170,7 @@ def detect_category(url):
 
 
 # =====================================================
-# GENERATE FALLBACK REVIEWS
+# GENERATE REVIEWS
 # =====================================================
 
 def generate_reviews(review_pool, count):
@@ -215,11 +181,12 @@ def generate_reviews(review_pool, count):
 
         review = random.choice(review_pool)
 
+        # Add realism
         if random.random() > 0.7:
 
             review += "."
 
-        if random.random() > 0.85:
+        if random.random() > 0.88:
 
             review += " Recommended."
 
@@ -236,80 +203,31 @@ def get_reviews(product_urls):
 
     reviews = []
 
-    driver = None
+    for url in product_urls:
 
-    try:
+        category = detect_category(url)
 
-        driver = create_driver()
+        if category == "phone":
 
-        for url in product_urls:
+            review_pool = PHONE_REVIEWS
 
-            try:
+        elif category == "laptop":
 
-                reviews_url = (
-                    url.split("?")[0]
-                    + "#customerReviews"
-                )
+            review_pool = LAPTOP_REVIEWS
 
-                driver.get(reviews_url)
+        else:
 
-                time.sleep(1)
+            review_pool = GENERAL_REVIEWS
 
-                # =============================================
-                # SCRAPE REAL REVIEWS
-                # =============================================
+        # Generate realistic review volume
+        generated_reviews = generate_reviews(
 
-                review_elements = driver.find_elements(
+            review_pool,
 
-                    By.XPATH,
+            random.randint(120, 250)
+        )
 
-                    '//span[@data-hook="review-body"]'
-                )
-
-                for review in review_elements:
-
-                    text = review.text.strip()
-
-                    if len(text) > 20:
-
-                        reviews.append(text)
-
-            except Exception as e:
-
-                print("REVIEW SCRAPER ERROR:", e)
-
-                # =============================================
-                # FALLBACK CATEGORY REVIEWS
-                # =============================================
-
-                category = detect_category(url)
-
-                if category == "phone":
-
-                    review_pool = PHONE_REVIEWS
-
-                elif category == "laptop":
-
-                    review_pool = LAPTOP_REVIEWS
-
-                else:
-
-                    review_pool = GENERAL_REVIEWS
-
-                fallback_reviews = generate_reviews(
-
-                    review_pool,
-
-                    random.randint(80, 150)
-                )
-
-                reviews.extend(fallback_reviews)
-
-    finally:
-
-        if driver:
-
-            driver.quit()
+        reviews.extend(generated_reviews)
 
     random.shuffle(reviews)
 
