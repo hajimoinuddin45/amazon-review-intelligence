@@ -1,0 +1,203 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;700&display=swap');
+
+html, body, [class*="css"] {
+    font-family: 'Outfit', sans-serif;
+}
+
+/* ===============================
+MAIN APP
+=============================== */
+
+.stApp {
+
+    background:
+        linear-gradient(
+            rgba(2,6,23,0.88),
+            rgba(2,6,23,0.94)
+        ),
+        url("data:image/png;base64,REPLACE_IMAGE");
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-attachment: fixed;
+
+    color: white;
+}
+
+/* ===============================
+HERO SECTION
+=============================== */
+
+.hero-section {
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(15,23,42,0.88),
+            rgba(30,41,59,0.75)
+        );
+
+    border: 1px solid rgba(255,255,255,0.08);
+
+    border-radius: 30px;
+
+    padding: 3rem;
+
+    margin-bottom: 2rem;
+
+    backdrop-filter: blur(16px);
+
+    box-shadow:
+        0px 25px 60px rgba(0,0,0,0.5);
+
+    animation: floatCard 5s ease-in-out infinite;
+}
+
+@keyframes floatCard {
+
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+/* ===============================
+GLASS CARD
+=============================== */
+
+.glass-card {
+
+    background: rgba(255,255,255,0.05);
+
+    border-radius: 24px;
+
+    padding: 1.8rem;
+
+    backdrop-filter: blur(16px);
+
+    border: 1px solid rgba(255,255,255,0.08);
+
+    transition: 0.3s;
+
+    box-shadow:
+        0px 15px 40px rgba(0,0,0,0.35);
+}
+
+.glass-card:hover {
+
+    transform:
+        translateY(-8px)
+        scale(1.02);
+
+    box-shadow:
+        0px 20px 50px rgba(0,0,0,0.5);
+}
+
+/* ===============================
+BUTTONS
+=============================== */
+
+.stButton > button {
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #7c3aed
+        );
+
+    color: white;
+
+    border: none;
+
+    border-radius: 18px;
+
+    padding: 0.9rem 1.2rem;
+
+    font-size: 18px;
+
+    font-weight: 700;
+
+    transition: 0.3s;
+
+    box-shadow:
+        0px 10px 25px rgba(0,0,0,0.4);
+}
+
+.stButton > button:hover {
+
+    transform:
+        translateY(-5px);
+
+    box-shadow:
+        0px 20px 45px rgba(0,0,0,0.5);
+}
+
+/* ===============================
+METRICS
+=============================== */
+
+.metric-card {
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,0.05),
+            rgba(255,255,255,0.02)
+        );
+
+    border-radius: 24px;
+
+    padding: 2rem;
+
+    text-align: center;
+
+    border: 1px solid rgba(255,255,255,0.06);
+
+    backdrop-filter: blur(14px);
+
+    transition: 0.3s;
+}
+
+.metric-card:hover {
+
+    transform:
+        translateY(-6px);
+
+    box-shadow:
+        0px 20px 50px rgba(0,0,0,0.4);
+}
+
+/* ===============================
+SIDEBAR
+=============================== */
+
+[data-testid="stSidebar"] {
+
+    background:
+        linear-gradient(
+            180deg,
+            #020617,
+            #0f172a
+        );
+}
+
+/* ===============================
+TABLE
+=============================== */
+
+[data-testid="stDataFrame"] {
+
+    border-radius: 24px;
+
+    overflow: hidden;
+}
