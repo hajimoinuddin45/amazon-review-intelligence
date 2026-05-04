@@ -587,3 +587,9 @@ Revenue estimations and AI insights are approximate analytical outputs generated
 # License
 
 This project is licensed under the MIT License.
+
+---
+
+## Live Demo
+
+https://amazon-review-intelligence.streamlit.app
