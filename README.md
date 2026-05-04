@@ -592,4 +592,4 @@ This project is licensed under the MIT License.
 
 ## Live Demo
 
-https://amazon-review-intelligence.streamlit.app
+https://hajimoinuddin45-amazon-review-intelligence-app-c4vhta.streamlit.app/
